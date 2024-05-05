@@ -1,67 +1,38 @@
-n = 3
+A = Semaphore(1)
+B = semaphore(1)
+C = Semaphore(1)
 
-count1 = Semaphore(3)
+#Thread A
+c.wait()
+b.wait()
+a.wait()
 
-barrier1 = Semaphore(0)
-barrier2 = Semaphore(1)
-mutex = Semaphore(1)
+#critical section
 
-## Thread A
-mutex.wait()
-count1.wait()
-if count1.n == 0:
-    barrier2.wait()
-    barrier1.signal()
-mutex.signal()
-barrier1.wait()
-count1.signal()
-barrier1.signal()
-# critical section
-mutex.wait()
-if barrier2.n == 1-n:
-    barrier1.wait()
-    barrier2.signal()
-mutex.signal()
+a.signal()
+c.signal()
+b.signal
 
-barrier2.wait()
-barrier2.signal()
 
-##Thread B
-mutex.wait()
-count1.wait()
-if count1.n == 0:
-    barrier2.wait()
-    barrier1.signal()
-mutex.signal()
-barrier1.wait()
-count1.signal()
-barrier1.signal()
-# critical section
-mutex.wait()
-if barrier2.n == 1-n:
-    barrier1.wait()
-    barrier2.signal()
-mutex.signal()
+#Thread B
+a.wait()
+c.wait()
+b.wait()
 
-barrier2.wait()
-barrier2.signal()
+#critical section
 
-##Thread C
-mutex.wait()
-count1.wait()
-if count1.n == 0:
-    barrier2.wait()
-    barrier1.signal()
-mutex.signal()
-barrier1.wait()
-count1.signal()
-barrier1.signal()
-# critical section
-mutex.wait()
-if barrier2.n == 1-n:
-    barrier1.wait()
-    barrier2.signal()
-mutex.signal()
+b.signal()
+a.signal()
+c.signal
 
-barrier2.wait()
-barrier2.signal()
+
+#Thread C
+b.wait()
+a.wait()
+c.wait()
+
+#critical section
+
+c.signal()
+b.signal()
+a.signal

@@ -1,7 +1,6 @@
 n = 3
 
 barier1_check = Semaphore(n)
-
 barier2_check = Semaphore(n)
 
 barrier1 = Semaphore(0)

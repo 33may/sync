@@ -1,5 +1,4 @@
 n = 4
-
 count = 0
 
 barrier1 = Semaphore(0)
